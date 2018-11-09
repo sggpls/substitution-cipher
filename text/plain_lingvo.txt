@@ -1,0 +1,12 @@
+This programme offers training for language experts who are able to work with language data, build models and process them as part of contemporary linguistic theories, as well as solve various problems in applied linguistics.
+
+The programme involves two tracks. Linguistic Theory offers students in-depth knowledge of linguistic typology and sociolinguistics, opportunities to study the processes taking place in the Russian language today, and the skills needed to solve problems in applied linguistics.
+
+Computational Linguistics teaches students to master technologies used in automated processing of natural language, and offers studies in software development and mathematical methods.
+
+Students in the programme participate in academic research and projects carried out by the School of Linguistics, expeditions and internships at international universities, and practical training in companies involved in computer linguistics.
+
+Today computer and corpora technologies play an important role in language studies and language learning along with traditional methods of analysis. New corpora resources and software for language analysis are regularly developed. Experts from Russia, CIS and other countries discussed the latest achievements in this field at the international conference ‘Corpus Technologies, Digital Humanities and Modern Research’.
+
+The Higher School of Economics is very serious about students getting involved in undergraduate research. For Russian Science Day, celebrated on February 8, the HSE News Service spoke with three young HSE researchers about their work and learned how the students set goals for themselves, achieve results, and move forward with what some might deem frighteningly ambitious research ideas.
+

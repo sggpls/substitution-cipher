@@ -4,8 +4,11 @@
 #include <english_preprocessor.hpp>
 #include <ngram_scorer.hpp>
 
-static const text_t english = "abcdefghijklmnopqrstuvwxyz";
+using text_t = std::string;
+static const text_t eng_alphabet = "abcdefghijklmnopqrstuvwxyz";
 using EnglishDecoder = CipherTransformer<EnglishPreprocessor, NgramScorer>;
+using score_t = double;
+using freq_map_t = std::unordered_map<text_t, score_t>;
 
 
 freq_map_t ReadNgrams(const text_t& path_to_file) {
@@ -35,6 +38,8 @@ text_t ReadText(const text_t& filename) {
     return text;
 }
 
+static const auto quad_map = ReadNgrams("../text/ngram/english_quadgrams.txt");
+
 TEST(EnglishPreprocessor, SimpleTest) {
     EnglishPreprocessor ep;
 
@@ -44,20 +49,29 @@ TEST(EnglishPreprocessor, SimpleTest) {
     EXPECT_EQ(ep("ЙЦУКЕНQWERTY"), "qwerty");
 }
 
-TEST(EnglishDecoder, JohnBrzenk) {
+TEST(EnglishQuadsDecoder, JohnBrzenk) {
     EnglishPreprocessor preprocessor;
+    NgramScorer quad_scorer(quad_map, 4);
+    EnglishDecoder decoder(preprocessor, quad_scorer, eng_alphabet, -1);
 
-    const auto freq_map = ReadNgrams("../text/ngram/english_quadgrams.txt");
-    NgramScorer quad_scorer(freq_map, 4);
-
-    EnglishDecoder decoder(preprocessor, quad_scorer, english, -1);
     const text_t plain_text = ReadText("../text/plain_john.txt");
     const text_t cipher_text = ReadText("../text/cipher_john.txt");
 
-    decoder.Fit(cipher_text, 890, 20, 2000);
+    decoder.Fit(cipher_text, 1234, 16, 2000);
     EXPECT_EQ(decoder.Transform(cipher_text), plain_text);
 }
 
+TEST(EnglishQuadsDecoder, Lingvo) {
+    EnglishPreprocessor preprocessor;
+    NgramScorer quad_scorer(quad_map, 4);
+    EnglishDecoder decoder(preprocessor, quad_scorer, eng_alphabet, -1);
+
+    const text_t plain_text = ReadText("../text/plain_lingvo.txt");
+    const text_t cipher_text = ReadText("../text/cipher_lingvo.txt");
+    decoder.Fit(cipher_text, 1234, 16, 2000);
+
+    EXPECT_EQ(decoder.Transform(cipher_text), plain_text);
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

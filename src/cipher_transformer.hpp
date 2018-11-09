@@ -96,23 +96,23 @@ CipherTransformer<Preprocessor, Scorer>::InverseTransform(const text_t& text) {
 template<class Preprocessor, class Scorer>
 typename CipherTransformer<Preprocessor, Scorer>::text_t
 CipherTransformer<Preprocessor, Scorer>::Transform(const text_t& text, const key_t& key) {
-    std::map<char, char> key_map;
+    using char_t = typename text_t::value_type;
+    std::map<char_t, char_t> map;
     for (size_t i = 0; i < key.size(); i++) {
-        key_map[alphabet_[i]] = key[i];
+        map[alphabet_[i]] = key[i];
     }
 
-    std::string key_text{text};
-    for (char& c : key_text) {
-        if (std::isalpha(c)) {
+    text_t transformed(text);
+    for (char& c : transformed) {
+        if (preprocessor_.IsValidChar(c)) {
             if (std::islower(c)) {
-                c = key_map[c];
+                c = map[c];
             } else {
-                c = static_cast<char>(std::toupper(static_cast<unsigned char>(
-                    key_map[static_cast<char>(std::tolower(static_cast<unsigned char>(c)))])));
+                c = std::toupper(map[std::tolower(c)]);
             }
         }
     }
-    return key_text;
+    return transformed;
 }
 
 template<class Preprocessor, class Scorer>
@@ -184,15 +184,3 @@ CipherTransformer<Preprocessor, Scorer>::Shuffle(Generator* gen, const key_t &ke
     std::shuffle(shuffled.begin(), shuffled.end(), *gen);
     return shuffled;
 }
-
-struct RowTextProcessor {
-    std::string operator ()(const std::string& text) const {
-        std::string row_text;
-        for (char c : text) {
-            if (std::isalpha(c)) {
-                row_text += static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
-            }
-        }
-        return row_text;
-    }
-};

@@ -7,12 +7,6 @@
 #include <fstream>
 
 
-namespace  {
-    using score_t = double;
-    using text_t = std::string;
-    using freq_map_t = std::unordered_map<text_t, score_t>;
-}
-
 struct NgramScorer {
     using score_t = double;
     using text_t = std::string;
