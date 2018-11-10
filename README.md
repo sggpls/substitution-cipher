@@ -1,5 +1,9 @@
 # substitution-cipher
-A multithreading modern C++11 implementation of an algorithm described by Hasinoff (2003). Also see Chen and Rosenthal (2012) and Diaconis (2009) for more information.
+A multithreading modern C++11 implementation of an algorithm described by Hasinoff (2003). The solver consists of two main components, a generic stochastic local search
+(SLS) method for navigating the key space, and a scoring function for evaluating the
+goodness of various keys. The scoring function for a particular key is defined as the loglikelihood
+of an
+*n*-gram language model applied to the ciphertext decrypted using that k Also see Chen and Rosenthal (2012) and Diaconis (2009) for more information.
 
 ### References
 [1] Chen, J., & Rosenthal, J. S. (2012). Decrypting classical cipher text using Markov chain Monte Carlo. Statistical Computing, 22, 397–413. doi:10.1007/s11222-011-9232-5
