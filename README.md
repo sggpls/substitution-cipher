@@ -1,5 +1,5 @@
 # substitution-cipher
-A multithreading modern C++11 implementation of an algorithm described by Hasinoff (2003, p. 3). Also see Chen and Rosenthal (2012) and Diaconis (2009) for more information.
+A multithreading modern C++11 implementation of an algorithm described by Hasinoff (2003). Also see Chen and Rosenthal (2012) and Diaconis (2009) for more information.
 
 ### References
 [1] Chen, J., & Rosenthal, J. S. (2012). Decrypting classical cipher text using Markov chain Monte Carlo. Statistical Computing, 22, 397–413. doi:10.1007/s11222-011-9232-5
